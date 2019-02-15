@@ -14,7 +14,7 @@ public class Livro implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "isbn", nullable = false, length = 13)
+    @Column(name = "isbn",unique = true,nullable = false, length = 13)
     private String isbn;
     @Column(name = "titulo", nullable = false, length = 50)
     private String titulo;

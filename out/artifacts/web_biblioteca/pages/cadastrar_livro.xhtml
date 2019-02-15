@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Cadastrar livros</title>
+    <link type="text/css" rel="stylesheet" href="resources/css/estilos.css"/>
+</h:head>
+<h:body>
+    <ui:include src="/inc/menu.xhtml"/>
+    <f:view>
+        <h:form id="frmCadLivro">
+            <h:outputLabel value="cadastrar livro" styleClass="txtH1"/>
+            <h:panelGrid columns="2">
+                <h:outputText value="ISBN"/>
+                <h:inputText value="#{livroBean.livro.isbn}"/>
+                <h:outputText value="Edição"/>
+                <h:inputText value="#{livroBean.livro.edicao}"/>
+                <h:outputText value="Titulo"/>
+                <h:inputText value="#{livroBean.livro.titulo}"/>
+                <h:outputText value="Descição"/>
+                <h:inputText value="#{livroBean.livro.descricao}"/>
+                <h:outputText value="Publicação"/>
+                <h:inputText value="#{livroBean.livro.publicacao}"/>
+                <h:panelGroup>
+                    <h:commandButton value="Cadastrar"  action="#{livroBean.cadastrarLivro}"/>
+                </h:panelGroup>
+            </h:panelGrid>
+
+        </h:form>
+    </f:view>
+</h:body>
+</html>

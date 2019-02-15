@@ -1,9 +1,11 @@
 import br.com.livraria.dao.LivroDao;
 import br.com.livraria.excpetions.LivroException;
+import br.com.livraria.interfaces.LivroDaoImpl;
 import br.com.livraria.model.Livro;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * @author - Everton Ribeiro
@@ -48,8 +50,48 @@ public class TestesLivro {
     }
 
     @Test
-    public void buscar(){
+    public void insereNovoLivroParaExclusao() throws LivroException {
+        Livro livro = new Livro();
+        livro.setIsbn("0000000");
+        livro.setTitulo("teste");
+        livro.setEdicao(0);
+        livro.setPublicacao("1986");
+        LivroDaoImpl livroDao = new LivroDao();
+        livroDao.salvar(livro);
+    }
+
+    @Test
+    public void deveBuscarLivro(){
         Livro livro = dao.buscarPorId(4L);
         System.out.println(livro.toString());
     }
+
+    @Test
+    public void deveAtuallizarLivro(){
+        Livro livroAchado = dao.buscarPorId(4L);
+        livroAchado.setTitulo("livro achado");
+        livroAchado.setIsbn("XXX-0000-22");
+        dao.atualizar(livroAchado);
+    }
+
+    @Test
+    public void deveListarTodosLivros(){
+        List<Livro> ls = dao.listar();
+        for(Livro livro : ls){
+            System.out.println(livro.toString());
+        }
+    }
+
+    @Test
+    public void deveBuscarPorIsbn(){
+      Livro livro = dao.buscarPorIsbn("XXX-0000-22");
+        System.out.println(livro);
+    }
+
+    @Test
+    public void deveRemoverLivro(){
+        Livro l = dao.buscarPorId(9L);
+        dao.remover(l);
+    }
+
 }

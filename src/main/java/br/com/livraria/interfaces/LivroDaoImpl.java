@@ -11,7 +11,7 @@ import java.util.List;
  **/
 public interface LivroDaoImpl {
 
-    boolean salvar(Livro livro) throws LivroException;
+    boolean salvar(Livro livro);
 
     Livro atualizar(Livro livro);
 
@@ -19,7 +19,7 @@ public interface LivroDaoImpl {
 
     List<Livro> listar();
 
-    List<Livro> buscarPorIsbn(String isbn);
+    Livro buscarPorIsbn(String isbn);
 
     List<Livro> buscarPorTitulo(String titulo);
 

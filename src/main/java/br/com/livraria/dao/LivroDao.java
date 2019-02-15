@@ -19,7 +19,7 @@ public class LivroDao implements LivroDaoImpl {
     private EntityTransaction transaction = em.getTransaction();
 
     @Override
-    public boolean salvar(Livro livro)  throws LivroException{
+    public boolean salvar(Livro livro){
         transaction.begin();
         em.persist(livro);
         transaction.commit();
@@ -28,24 +28,30 @@ public class LivroDao implements LivroDaoImpl {
 
     @Override
     public Livro atualizar(Livro livro) {
-
-        return null;
+        transaction.begin();
+        em.merge(livro);
+        transaction.commit();
+        return livro;
     }
 
     @Override
     public boolean remover(Livro livro) {
-
-        return false;
+        transaction.begin();
+        em.remove(livro);
+        transaction.commit();
+        return true;
     }
 
     @Override
     public List<Livro> listar() {
-        return null;
+        List<Livro> livros = em.createQuery("from Livro ").getResultList();
+        return livros;
     }
 
     @Override
-    public List<Livro> buscarPorIsbn(String isbn) {
-        return null;
+    public Livro buscarPorIsbn(String isbn) {
+        Livro livro = (Livro) em.createQuery("select livro from Livro livro where livro.isbn = "+isbn).getSingleResult();
+        return livro;
     }
 
     @Override
